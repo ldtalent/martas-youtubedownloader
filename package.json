@@ -1,0 +1,31 @@
+{
+  "name": "yt-converter",
+  "version": "1.0.0",
+  "description": "A simple tool for downloading youtube videos and converting them to a specified format.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"No tests specified.\" && exit 0",
+    "build": "tsc",
+    "watch": "tsnd --respawn ./src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/learningdollars/martas-project.git"
+  },
+  "keywords": [
+    "youtube",
+    "ffmpeg",
+    "typescript",
+    "node"
+  ],
+  "author": "martas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/learningdollars/martas-project/issues"
+  },
+  "homepage": "https://github.com/learningdollars/martas-project#readme",
+  "dependencies": {
+    "ts-node-dev": "^1.0.0-pre.40",
+    "typescript": "^3.5.2"
+  }
+}
