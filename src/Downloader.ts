@@ -1,9 +1,9 @@
 import youtubedl from "youtube-dl";
 import fs from "fs"
 import path from "path"
-import Utils from "./utils";
+import Utils from "./Utils";
 import humanize from "humanize"
-import ProcessExec from "../types/process";
+import ProcessExt from "../types/processExt";
 
 export default class Downloader {
     private _utils: Utils
@@ -37,7 +37,7 @@ export default class Downloader {
         this._utils.loader(true)
 
         return new Promise(async (resolve, reject) => {
-            let processExec: ProcessExec = process
+            let processExt: ProcessExt = process
             let video: youtubedl.Youtubedl
             let videoInfo
             try {
@@ -69,9 +69,9 @@ export default class Downloader {
                 position += chunk.length;
                 if (videoSize) {
                     var percent = (position / videoSize * 100).toFixed(2);
-                    if (processExec.stdout.cursorTo && processExec.stdout.clearLine) {
-                        processExec.stdout.cursorTo(0);
-                        processExec.stdout.clearLine(1);
+                    if (processExt.stdout.cursorTo && processExt.stdout.clearLine) {
+                        processExt.stdout.cursorTo(0);
+                        processExt.stdout.clearLine(1);
                         process.stdout.write(percent + '%');
                     }
                 }
