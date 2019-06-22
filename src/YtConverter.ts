@@ -1,5 +1,14 @@
+import Args from "./Args";
+import Instances from "./instances";
+
 export default class YtConverter {
 
+    _args: Args
+
+    constructor() {
+        const { args } = new Instances()
+        this._args = args
+    }
     /**
      * @param  {Array<string>} urls
      * - array of video urls to download
@@ -11,5 +20,11 @@ export default class YtConverter {
      *  - format to convert into - default: "mp3"
      */
     async init(urls?: Array<string>, dir?: string, convert?: boolean, format?: string, update?: boolean) {
+        this._args.setArgs(urls, dir, convert, format, update)
+
+        if (!Array.isArray(this._args.urls)) {
+            throw new Error("The first argument must be an array!")
+        }
+        process.stdout.write(`\nDownloading ${this._args.urls.length} videos to directory ${this._args.dir}`)
     }
 }
