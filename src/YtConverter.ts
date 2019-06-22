@@ -1,5 +1,5 @@
 import Args from "./Args";
-import Instances from "./instances";
+import Instances from "./Instances";
 
 export default class YtConverter {
 
