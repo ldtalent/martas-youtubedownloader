@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "A simple tool for downloading youtube videos and converting them to a specified format.",
   "main": "index.js",
+  "bin":{
+    "ytc": "./bin/exec.js"
+  },
   "scripts": {
     "test": "echo \"No tests specified.\" && exit 0",
     "start": "node ./dist",
