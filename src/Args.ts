@@ -41,6 +41,7 @@ export default class Args {
                 describe: "update ffmpeg",
                 boolean: true
             })
+            .alias("h", "help")
             .help('help')
             .argv
         if (args.url)
