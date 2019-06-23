@@ -19,7 +19,7 @@ export default class Downloader {
         if (!url.match("/watch?"))
             throw new Error("Invalid video url")
         return new Promise((res, rej) => {
-            return youtubedl.getInfo(url, (err:Error, info:any) => {
+            return youtubedl.getInfo(url, (err: Error, info: any) => {
                 if (err)
                     rej(err)
                 else {
@@ -32,8 +32,9 @@ export default class Downloader {
     /**
      * @param  {string} url - video url
      * @param  {string} dir - destination directory
+     * @returns string
      */
-    async downloadVideos(url: string, dir: string) {
+    async downloadVideos(url: string, dir: string): Promise<{ filename: string, dir: string }> {
         this._utils.loader(true)
 
         return new Promise(async (resolve, reject) => {
@@ -78,7 +79,8 @@ export default class Downloader {
             });
             video.on('end', async () => {
                 process.stdout.write(' - DONE\n');
-                resolve()
+                resolve({ filename, dir })
+                this._utils.loader(false)
             })
 
             video.pipe(fs.createWriteStream(`${path.join(dir, filename)}`));
