@@ -26,8 +26,13 @@
   },
   "homepage": "https://github.com/learningdollars/martas-project#readme",
   "dependencies": {
+    "@types/extract-zip": "^1.6.2",
+    "@types/request": "^2.48.1",
     "@types/youtube-dl": "^1.12.2",
+    "extract-zip": "^1.6.7",
     "humanize": "0.0.9",
+    "request": "^2.88.0",
+    "request-progress": "^3.0.0",
     "shelljs": "^0.8.3",
     "ts-node-dev": "^1.0.0-pre.40",
     "typescript": "^3.5.2",
