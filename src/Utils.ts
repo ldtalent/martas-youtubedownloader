@@ -1,6 +1,7 @@
 import fs from "fs"
 import shell from "shelljs"
 import os from "os"
+import extract from "extract-zip"
 export default class Utils {
     private _interval!: NodeJS.Timeout
     ffPath!: string
@@ -28,7 +29,32 @@ export default class Utils {
             }, 200)
         }
     }
-    
+    /**
+     * @param  {string} path target file path
+     * @param  {string} dir destination directory
+     * @returns Promise
+     */
+    async extract(path: string, dir: string): Promise<void> {
+        return new Promise((resolve, reject) => {
+            this.loader(true)
+            extract(path, { dir: dir, defaultFileMode: 777 }, (err: Error | undefined) => {
+                if (err) {
+                    reject(err)
+                    this.loader(false)
+                    return
+                }
+                fs.unlink(path, (err: NodeJS.ErrnoException | null) => {
+                    if (err) {
+                        reject(err)
+                        return
+                    }
+                    resolve()
+                    this.loader(false)
+                })
+            })
+        })
+    }
+
     /**
      * @returns string | null
      */

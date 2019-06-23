@@ -75,25 +75,4 @@ export default class FfmpegDownloader {
                 .pipe(fs.createWriteStream(zipPath))
         })
     }
-
-    async extract(path: string, dir: string) {
-        return new Promise((resolve, reject) => {
-            process.stdout.write(`\nExtracting ffmpeg v${this.version}`)
-            this.utils.loader(true)
-            extract(path, { dir: dir, defaultFileMode: 777 }, (err: Error | undefined) => {
-                if (err) {
-                    reject(err)
-                    return
-                }
-                fs.unlink(path, (err: NodeJS.ErrnoException | null) => {
-                    if (err) {
-                        reject(err)
-                        return
-                    }
-                    resolve()
-                    this.utils.loader(false)
-                })
-            })
-        })
-    }
 }
