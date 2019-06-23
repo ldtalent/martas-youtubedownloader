@@ -75,4 +75,24 @@ export default class Utils {
             default: return null
         }
     }
+     /**
+     * @param  {string} data string in format hh:mm:ss
+     * @returns {number} duration in miliseconds
+     */
+    getDuration(data: string): number {
+        let dataArr = data.split(":")
+        let duration = 0
+        if (dataArr.length !== 3)
+            return NaN
+        dataArr.forEach((d: string, i: number) => {
+            switch (i) {
+                case (0): duration += parseInt(d) * 3600 * 1000
+                    break;
+                case (1): duration += parseInt(d) * 60 * 1000
+                    break;
+                case (2): duration += parseInt(d) * 1000
+            }
+        })
+        return duration
+    }
 }
