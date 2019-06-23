@@ -2,18 +2,21 @@ import Args from "./Args";
 import Instances from "./Instances";
 import Downloader from "./Downloader";
 import FfmpegDownloader from "./ffmpeg-downloader";
+import Converter from "./Converter";
 
 export default class YtConverter {
 
     _args: Args
     _downloader: Downloader
     _ffmpegDownloader: FfmpegDownloader
+    _converter!: Converter
 
     constructor() {
-        const { args, downloader,  ffmpegDownloader } = new Instances()
+        const { args, downloader, ffmpegDownloader, converter } = new Instances()
         this._args = args
         this._downloader = downloader
         this._ffmpegDownloader = ffmpegDownloader
+        this._converter = converter
     }
     /**
      * @param  {Array<string>} urls
@@ -35,7 +38,10 @@ export default class YtConverter {
             throw new Error("The first argument must be an array!")
         }
         process.stdout.write(`\nDownloading ${this._args.urls.length} videos to directory ${this._args.dir}`)
-        for (let url of this._args.urls)
-            await this._downloader.downloadVideos(url.toString(), this._args.dir).catch(err => { throw err })
+        for (let url of this._args.urls) {
+            const { filename, dir } = await this._downloader.downloadVideos(url.toString(), this._args.dir).catch(err => { throw err })
+            if (this._args.convert)
+                await this._converter.convert(filename, dir, this._args.format).catch((err: Error) => { throw err })
+        }
     }
 }
