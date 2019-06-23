@@ -9,6 +9,8 @@
   "scripts": {
     "test": "echo \"No tests specified.\" && exit 0",
     "start": "node ./dist",
+    "preinstall": "npm run build",
+    "postinstall": "node ./dist/scripts/downloadFFmpeg.js",
     "build": "tsc",
     "watch": "tsnd --respawn ./src"
   },
