@@ -25,8 +25,8 @@ new YtConverter().init(["https://www.youtube.com/watch\?v\=07d2dXHYb94"], "./mov
 
 #### Options
 
-`-c - convert to .mp3`
-`-f [format] - convert to any other format`
-`-d [directory] - set a custom target directory`
-`--uf - update ffmpeg binary`
-`-h - show help`
+- `-c` - convert to .mp3
+- `-f [format]` - convert to any other format
+- `-d [directory]` - set a custom target directory
+- `--uf` - update ffmpeg binary
+- `-h ` - show help
