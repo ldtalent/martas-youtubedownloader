@@ -10,10 +10,11 @@ export default class Utils {
      */
     async checkDir(dir: string) {
         return new Promise((resolve) => {
-            if (!fs.existsSync(dir))
-                return shell.mkdir("-p", dir)
-            else
+            if (!fs.existsSync(dir)) {
+                shell.mkdir("-p", dir)
                 resolve()
+            }
+            resolve()
         })
     }
     /**
@@ -75,10 +76,10 @@ export default class Utils {
             default: return null
         }
     }
-     /**
-     * @param  {string} data string in format hh:mm:ss
-     * @returns {number} duration in miliseconds
-     */
+    /**
+    * @param  {string} data string in format hh:mm:ss
+    * @returns {number} duration in miliseconds
+    */
     getDuration(data: string): number {
         let dataArr = data.split(":")
         let duration = 0
