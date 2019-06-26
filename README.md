@@ -6,7 +6,7 @@ This is a simple tool that enables the download and conversion of Youtube videos
 
 - clone this repository
 
-- run: `npm i [repository root]` for local or `npm i -g [repository root]` for global installation. 
+- run: `npm i <repository root>` for local or `npm i -g <repository root>` for global installation. 
 
 ## Usage
 
@@ -20,7 +20,7 @@ new YtConverter().init(["https://www.youtube.com/watch\?v\=07d2dXHYb94"], "./mov
 
 ### Global
 
-`ytc --url [video-url]`
+`ytc --url <video-url>`
 
 
 #### Options
