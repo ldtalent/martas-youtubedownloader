@@ -3,15 +3,14 @@
   "version": "1.0.0",
   "description": "A simple tool for downloading youtube videos and converting them to a specified format.",
   "main": "index.js",
-  "bin":{
+  "bin": {
     "ytc": "./bin/exec.js"
   },
   "scripts": {
     "test": "echo \"No tests specified.\" && exit 0",
     "start": "node ./dist",
-    "preinstall": "npm run build",
-    "postinstall": "node ./dist/scripts/downloadFFmpeg.js",
-    "build": "tsc",
+    "postinstall": "tsc && node ./dist/scripts/downloadFFmpeg.js",
+    "build": "npx tsc",
     "watch": "tsnd --respawn ./src"
   },
   "repository": {
