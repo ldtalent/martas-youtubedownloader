@@ -27,8 +27,11 @@ export default class FfmpegDownloader {
         }
         await this.downloadVersion()
     }
-   
-   
+    /**
+     * @returns {object} update: should ffmpeg be updated; version: current ffmpeg version
+     * 
+     * - Check if ffmpeg should be updated
+     */
     async checkUpdate(): Promise<{ update: boolean, version: string }> {
         const ffVersion = ffInfo.ffVersion
         return new Promise((resolve, reject) => {
@@ -52,18 +55,24 @@ export default class FfmpegDownloader {
             })
         })
     }
-
-    async downloadVersion() {
+  
+    /**
+     * @returns Promise<void>
+     * 
+     * - Downloads ffmpeg.
+     */
+    async downloadVersion():Promise<void> {
         const ffDir = path.join(__dirname, `../../ffmpeg/${this.platform}/${this.version}`)
         await this.utils.checkDir(ffDir)
         this.ffPath = path.join(ffDir, "ffmpeg")
         const zipPath = this.ffPath + ".zip"
+        // If platform is windows, add .exe extension and replace path slashes.
         if (this.utils.getPlatform() === "windows-64") {
             this.ffPath += ".exe"
             this.ffPath = this.ffPath.replace(/\\/g, "/")
         }
         fs.writeFileSync(path.join(__dirname, "./ffInfo.json"), Buffer.from(`{ "ffPath": "${this.ffPath}","ffVersion":"${this.version}"}`))
-
+        // Download ffmpeg
         return new Promise((resolve, reject) => {
             process.stdout.write(`Downloading ffmpeg v${this.version}`)
             this.utils.loader(true)

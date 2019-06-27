@@ -51,7 +51,15 @@ export default class Args {
         this._format = args.format
         this._update = args["update-ffmpeg"]
     }
-
+    /**
+     * @param  {Array<string>} urls optional - an array of urls
+     * @param  {string} dir? - target directory
+     * @param  {boolean} convert? should the video file be converted
+     * @param  {string} format? format to convert into
+     * @param  {boolean} update? update ffmpeg
+     * 
+     * Replaces CLI arguments with parameters passed from YtConverter.init funtion
+     */
     setArgs(urls?: Array<string>, dir?: string, convert?: boolean, format?: string, update?: boolean) {
         if (urls)
             this._urls = urls

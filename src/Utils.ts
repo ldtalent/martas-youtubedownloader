@@ -7,6 +7,7 @@ export default class Utils {
     ffPath!: string
     /**
      * @param  {string} dir directory path
+     * Checks if the directory exists, and if not, it creates it.
      */
     async checkDir(dir: string) {
         return new Promise((resolve) => {

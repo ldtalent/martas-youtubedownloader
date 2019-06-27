@@ -32,7 +32,7 @@ export default class Downloader {
     /**
      * @param  {string} url - video url
      * @param  {string} dir - destination directory
-     * @returns string
+     * @returns {object} video filename and directory.
      */
     async downloadVideos(url: string, dir: string): Promise<{ filename: string, dir: string }> {
         this._utils.loader(true)
@@ -40,7 +40,11 @@ export default class Downloader {
         return new Promise(async (resolve, reject) => {
             let processExt: ProcessExt = process
             let video: youtubedl.Youtubedl
-            let videoInfo
+            let videoInfo: youtubedl.Info
+            let position = 0;
+            let videoSize = 0;
+            let filename:string
+
             try {
                 videoInfo = await this.getVideoInfo(url)
             }
@@ -48,12 +52,11 @@ export default class Downloader {
                 reject(err)
                 return
             }
-            let filename = videoInfo._filename
-            let position = 0;
-            let videoSize: number
             if (!videoInfo) {
                 throw new Error(`Unable to get video info from url ${url}`)
             }
+            filename = videoInfo._filename
+
             await this._utils.checkDir(dir)
             video = youtubedl(url,
                 ['--format=18'],
@@ -69,6 +72,7 @@ export default class Downloader {
             video.on('data', (chunk: any) => {
                 position += chunk.length;
                 if (videoSize) {
+                    // calculate video download percentage
                     var percent = (position / videoSize * 100).toFixed(2);
                     if (processExt.stdout.cursorTo && processExt.stdout.clearLine) {
                         processExt.stdout.cursorTo(0);

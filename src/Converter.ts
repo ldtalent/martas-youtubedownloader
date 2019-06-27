@@ -14,10 +14,12 @@ export default class Converter {
      * @param  {string} file - filename to convert
      * @param  {string} dir - destination directory
      * @param  {string} format - format to convert into
+     * - Converts a file into a given format.
      */
     async convert(file: string, dir: string, format: string) {
         const fileArr = file.split(".")
         let ext = fileArr.pop() || "mp4"
+        // Read ffmpeg binary path from ffInfo.json
         const ffPath = JSON.parse(fs.readFileSync(path.join(__dirname, "./ffmpeg-downloader/ffInfo.json")).toString()).ffPath
 
         const filename = fileArr.join(".")
